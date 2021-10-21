@@ -1,23 +1,13 @@
 <template>
   <div class="home">
-    <vue-markdown :md="md"></vue-markdown>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import VueMarkdown from '@/components/markdown'
-import md from '@/docs/index.md'
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    VueMarkdown
-  },
-  setup () {
-    return {
-      md
-    }
-  }
+  name: 'Home'
 })
 </script>

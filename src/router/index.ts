@@ -1,11 +1,31 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('@/views/Home.vue'),
+    redirect: '/markdown',
+    children: [
+      {
+        path: '/markdown',
+        name: 'markdown',
+        component: () => import('@/views/markdown.vue'),
+        redirect: '/markdown/index.md'
+      },
+      {
+        path: '/markdown/:path/',
+        props: true,
+        name: 'markdownView',
+        component: () => import('@/views/markdown.vue')
+      },
+      {
+        path: '/markdown/:path/:name',
+        props: true,
+        name: 'markdownView2',
+        component: () => import('@/views/markdown.vue')
+      }
+    ]
   }
 ]
 
