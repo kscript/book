@@ -30,6 +30,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.2.0",
-    "typescript": "~4.1.5"
+    "github-markdown-css": "^5.0.0",
+    "markdown-it": "^12.2.0",
+    "typescript": "~4.1.5",
+    "vue-loader-v16": "^16.0.0-beta.5.4"
   }
 }
