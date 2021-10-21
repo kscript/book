@@ -15,7 +15,7 @@ export default defineComponent({
     return () =>
       h('div', {
         key: props.id,
-        class: props.id.replace(/[A-Z]/g, (s, i) => {
+        class: 'x-' + props.id.replace(/[A-Z]/g, (s, i) => {
           return (i === 0 ? '' : '-') + s.toLowerCase()
         }) + '-md demo-container'
       },
