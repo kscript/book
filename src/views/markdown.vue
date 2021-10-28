@@ -1,5 +1,8 @@
 <template>
-  <vue-markdown :md="md" ></vue-markdown>
+  <div class="article-container">
+    <h1>{{id}}</h1>
+    <vue-markdown :md="md" :id="id"></vue-markdown>
+  </div>
 </template>
 <script>
 import { defineComponent } from 'vue'
@@ -20,7 +23,7 @@ export default defineComponent({
   },
   setup (props) {
     const result = {
-      id: Math.random().toString(36).slice(2),
+      id: (props.name || props.path).replace(/\.md$/, ''),
       md: {}
     }
     try {
@@ -36,3 +39,9 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+.article-container{
+  width: 1100px;
+  margin: 30px auto;
+}
+</style>

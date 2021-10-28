@@ -15,9 +15,7 @@ export default defineComponent({
     return () =>
       h('div', {
         key: props.id,
-        class: 'x-' + props.id.replace(/[A-Z]/g, (s, i) => {
-          return (i === 0 ? '' : '-') + s.toLowerCase()
-        }) + '-md demo-container'
+        class: 'markdown-container'
       },
       props.md.render?.() || []
       )

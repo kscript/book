@@ -4,24 +4,23 @@ const transform = function (src) {
   const end = '-->'
   const regS = new RegExp(start, 'g')
   const regE = new RegExp(end, 'g')
+  const strMap = {
+    '{{': '\\{\\{',
+    '}}': '\\}\\}',
+    '<': '&lt;',
+    '`': '\\`'
+  }
   let curr
   try {
     while (curr = regS.exec(src)) {
       const startIndex = curr.index + start.length
       const text = src.slice(startIndex)
       const next = regE.exec(text)
-      const strMap = {
-        '{{': '\\{\\{',
-        '}}': '\\}\\}',
-        '`': '\\`'
-      }
       if (next) {
         src = src.slice(0, curr.index)
-          + '{{`'
-          + src.slice(startIndex, startIndex + next.index).replace(/(\{\{|\}\}|`)/g, (s) => {
+          + src.slice(startIndex, startIndex + next.index).replace(/(\{\{|\}\}|`|\<)/g, (s) => {
             return strMap[s] || ''
           })
-          + '`}}'
           + src.slice(startIndex + next.index + end.length)
         regS.lastIndex = regE.lastIndex = 0
       } else {
