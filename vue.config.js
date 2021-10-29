@@ -2,6 +2,16 @@ const path = require('path')
 module.exports = {
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   transpileDependencies: true,
+  productionSourceMap: false,
+  configureWebpack: {
+    externals: process.env.NODE_ENV === 'development' ? {} : {
+      'vue': 'Vue',
+      'vue-router': 'VueRouter',
+      'vuex': 'Vuex',
+      'highlight.js': 'hljs',
+      'markdown-it': 'markdownit'
+    }
+  },
   chainWebpack: config => {
     config.module
       .rule('md')
