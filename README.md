@@ -1,24 +1,6 @@
 # book
+一个轻量级的Markdown文件阅读应用
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 资源存放位置
+1. [markdown文件](./docs)
+2. [其它文件](./public)
