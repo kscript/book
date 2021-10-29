@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkbook"]=self["webpackChunkbook"]||[]).push([[621],{8621:function(e,u,n){n.r(u),n.d(u,{default:function(){return s}});var o=n(3396),r=(0,o.aZ)({name:"Home",setup(){return()=>(0,o.Wm)("div",{class:"home"},[(0,o.Wm)((0,o.up)("router-view"),null,null)])}});const t=r;var s=t}}]);
-//# sourceMappingURL=621.4957b8d4.js.map
