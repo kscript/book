@@ -17,7 +17,7 @@ export default defineComponent({
   },
   setup (props) {
     return () => {
-      return <div class="markdown-container" v-html={props.html}></div>
+      return <div class="markdown-container markdown-body" v-html={props.html}></div>
     }
   }
 })

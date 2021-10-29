@@ -8,6 +8,7 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import VueMarkdown from '@/components/markdown'
 import { getMarkdown, transform } from '@/utils/markdown'
+import hljs from 'highlight.js'
 const markdown = require('markdown-it')
 export default defineComponent({
   components: {
@@ -34,7 +35,16 @@ export default defineComponent({
         return markdown({
           html: true,
           linkify: true,
-          typographer: true
+          typographer: true,
+          langPrefix: 'hljs language-',
+          highlight (str, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+              try {
+                return hljs.highlight(lang, str).value
+              } catch (__) {}
+            }
+            return ''
+          }
         }).render(transform(data))
       }).then(html => {
         Object.assign(result, {
@@ -50,9 +60,12 @@ export default defineComponent({
   }
 })
 </script>
-<style>
+<style lang="scss">
 .article-container{
   width: 1100px;
-  margin: 30px auto;
+  margin: 0px auto;
+  padding: 20px 50px;
+  background: #fff;
+  box-sizing: border-box;
 }
 </style>
