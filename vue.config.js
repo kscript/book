@@ -22,5 +22,16 @@ module.exports = {
       .use(path.join(process.cwd() + '/src/loader/markdownLoader.js'))
       .loader(path.join(process.cwd() + '/src/loader/markdownLoader.js'))
       .end()
+  },
+  devServer: {
+    proxy: {
+      '/book': {
+        target: 'http://localhost:20080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/book': '/book'
+        }
+      }
+    }
   }
 }

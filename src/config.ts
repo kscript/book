@@ -1,5 +1,5 @@
 export const config = {
-  docsPath: 'docs/',
+  docsPath: process.env.NODE_ENV === 'development' ? 'book/' : '/docs/book/',
   docsExt: '.md',
   baseUrl: process.env.NODE_ENV === 'development' ? '/' : '/book/'
 }

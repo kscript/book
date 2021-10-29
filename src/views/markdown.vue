@@ -32,7 +32,7 @@ export default defineComponent({
       md: {}
     })
     try {
-      getMarkdown(`${config.docsPath}/${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
+      getMarkdown(`${config.docsPath}${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
         return markdown({
           html: true,
           linkify: true,
