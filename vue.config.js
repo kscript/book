@@ -1,6 +1,6 @@
 const path = require('path')
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'development' ? './' : '/book/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   transpileDependencies: true,
   chainWebpack: config => {
     config.module
