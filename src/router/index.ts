@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/markdown',
         name: 'markdown',
         component: () => import('@/views/markdown.vue'),
-        redirect: '/markdown/index.md'
+        redirect: '/markdown/index'
       },
       {
         path: '/markdown/:path/',

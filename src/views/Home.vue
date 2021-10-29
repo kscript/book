@@ -1,13 +1,14 @@
-<template>
-  <div class="home">
-    <router-view></router-view>
-  </div>
-</template>
-
-<script lang="ts">
+<script lang="tsx">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Home'
+  name: 'Home',
+  setup () {
+    return () => (
+      <div class="home">
+        <router-view></router-view>
+      </div>
+    )
+  }
 })
 </script>

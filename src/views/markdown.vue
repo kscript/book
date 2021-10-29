@@ -5,11 +5,12 @@
   </div>
 </template>
 <script>
+import hljs from 'highlight.js'
+import markdown from 'markdown-it'
 import { defineComponent, reactive, toRefs } from 'vue'
 import VueMarkdown from '@/components/markdown'
 import { getMarkdown, transform } from '@/utils/markdown'
-import hljs from 'highlight.js'
-const markdown = require('markdown-it')
+import config from '@/config'
 export default defineComponent({
   components: {
     VueMarkdown
@@ -26,12 +27,12 @@ export default defineComponent({
   },
   setup (props) {
     const result = reactive({
-      id: (props.name || props.path).replace(/\.md$/, ''),
+      id: (props.name || props.path),
       html: '',
       md: {}
     })
     try {
-      getMarkdown('docs/' + props.path + (props.name ? '/' + props.name : '')).then(res => res.text()).then(data => {
+      getMarkdown(`${config.docsPath}/${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
         return markdown({
           html: true,
           linkify: true,
