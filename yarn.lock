@@ -1403,7 +1403,7 @@
   resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-5.0.0-beta.7.tgz#a417a4f9c7b0102b6ab0df9a41c7a0a70dfac30b"
   integrity sha512-OwG3wZA2ruG6XNQdHsn5hBk0sjRJHkbCARkbnnwKDfULrsGt8xMqFEowiPH0xzVGQgPGqHPXyKvGbE/MRGJBeA==
 
-"@vue/cli-plugin-babel@~5.0.0":
+"@vue/cli-plugin-babel@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-babel/-/cli-plugin-babel-5.0.0-beta.7.tgz#2e149bf26b9001aa8cb9622ed49b3a5973b7b2db"
   integrity sha512-xB7NFldn+k17NXY5JsoNB6ZCwNd6yAZ+Xn9tEEaH3B/J+VQjCsSIgT4NxTpl0xBptq5CeCvFS7hW3fHIexcKFw==
@@ -1415,7 +1415,7 @@
     thread-loader "^3.0.0"
     webpack "^5.22.0"
 
-"@vue/cli-plugin-eslint@~5.0.0":
+"@vue/cli-plugin-eslint@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-eslint/-/cli-plugin-eslint-5.0.0-beta.7.tgz#4978907bf63a5d2446d70183e4c4a0fdeea95ad7"
   integrity sha512-ACKuxOI5XpuXZBIHwSI2RwLAOMikxFMKBPBICse/qNDmihU2kXfDcGMrqQOh7HbqQE4XdpwhaUvARHz80psxEg==
@@ -1427,14 +1427,14 @@
     webpack "^5.22.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-router@^5.0.0-beta.7", "@vue/cli-plugin-router@~5.0.0":
+"@vue/cli-plugin-router@^5.0.0-beta.7", "@vue/cli-plugin-router@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-router/-/cli-plugin-router-5.0.0-beta.7.tgz#dd4b41c2bbf9532f46d41ca856e589a82472172f"
   integrity sha512-EK4xNS/tt5QVR/v6ZYGxFeLobgMA4K9IuLvY2sdGWblDci3r9MpGETgg4IJPNvWEZukRGVTWjLjoJYpodUdJOA==
   dependencies:
     "@vue/cli-shared-utils" "^5.0.0-beta.7"
 
-"@vue/cli-plugin-typescript@~5.0.0":
+"@vue/cli-plugin-typescript@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-typescript/-/cli-plugin-typescript-5.0.0-beta.7.tgz#7ae79ca38910b819437ccc557b250ebcdc2e84bd"
   integrity sha512-01JD5yMmc+enhy7KmNJCSxX3wscy3EgNz3dXP1yNlgCkhiqmzeS5d+DOCN9JO+buGcP1S9h48RAnwAlEmY4zMA==
@@ -1451,12 +1451,12 @@
     webpack "^5.22.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-vuex@^5.0.0-beta.7", "@vue/cli-plugin-vuex@~5.0.0":
+"@vue/cli-plugin-vuex@^5.0.0-beta.7", "@vue/cli-plugin-vuex@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-plugin-vuex/-/cli-plugin-vuex-5.0.0-beta.7.tgz#080f03375f9c1a8af21c5afb129a13be2e591b3c"
   integrity sha512-RoQGXGtz1brmsSYLrkm/LnXlp+SGVVM4ncWAJv9pYoUBJAocOEX+WmfNhbYe6l9jtfq1AmimVV3Id7drOZDAOw==
 
-"@vue/cli-service@~5.0.0":
+"@vue/cli-service@~5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmjs.org/@vue/cli-service/-/cli-service-5.0.0-beta.7.tgz#e1805fc3cb1654539b9ca306c15c21ac556b4b4d"
   integrity sha512-C0sClCPzYFO1vwn4y6RQTdWPePX70tvoHJNrLFZHQiyp9vfY3zsnXjloEihqvdg6o7HxQfg/f8xPcS7WsM1Wbg==
