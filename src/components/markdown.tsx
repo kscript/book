@@ -9,15 +9,15 @@ export default defineComponent({
     md: {
       type: Object,
       default: () => ({})
+    },
+    html: {
+      type: String,
+      default: ''
     }
   },
   setup (props) {
-    return () =>
-      h('div', {
-        key: props.id,
-        class: 'markdown-container'
-      },
-      props.md.render?.() || []
-      )
+    return () => {
+      return <div class="markdown-container" v-html={props.html}></div>
+    }
   }
 })

@@ -1,12 +1,14 @@
 <template>
   <div class="article-container">
     <h1>{{id}}</h1>
-    <vue-markdown :md="md" :id="id"></vue-markdown>
+    <vue-markdown :md="md" :html="html" :id="id"></vue-markdown>
   </div>
 </template>
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import VueMarkdown from '@/components/markdown'
+import { getMarkdown, transform } from '@/utils/markdown'
+const markdown = require('markdown-it')
 export default defineComponent({
   components: {
     VueMarkdown
@@ -22,20 +24,29 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const result = {
+    const result = reactive({
       id: (props.name || props.path).replace(/\.md$/, ''),
+      html: '',
       md: {}
-    }
+    })
     try {
-      const mdDefault = props.path ? require('@/docs/' + props.path + (props.name ? '/' + props.name : '')) : {}
-      const md = (mdDefault || {}).default || {}
-      Object.assign(result, {
-        md
+      getMarkdown('docs/' + props.path + (props.name ? '/' + props.name : '')).then(res => res.text()).then(data => {
+        return markdown({
+          html: true,
+          linkify: true,
+          typographer: true
+        }).render(transform(data))
+      }).then(html => {
+        Object.assign(result, {
+          html
+        })
       })
     } catch (err) {
       console.log(err)
     }
-    return result
+    return {
+      ...toRefs(result)
+    }
   }
 })
 </script>
