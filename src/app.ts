@@ -10,3 +10,4 @@ export const loadApp = (): void => {
   }
   createApp(App).use(store).use(router).mount('#app')
 }
+export default loadApp

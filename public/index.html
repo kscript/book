@@ -6,26 +6,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <% if (process.env.NODE_ENV === 'production') { %>
-    <!-- 公共资源仓库 https://github.com/kscript/public/ -->
-    <!-- markdown样式 -->
-    <link rel="stylesheet" href="/public/css/github-markdown.css">
-    <!-- 代码高亮样式 -->
-    <link rel="stylesheet" href="/public/css/atom-one-dark-reasonable.css">
-    <% } %>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <% if (process.env.NODE_ENV === 'production') { %>
-      <script src="/public/js/vue@3.2.20.runtime.global.prod.js"></script>
-      <script src="/public/js/vue-router@4.0.12.global.prod.js"></script>
-      <script src="/public/js/vuex@4.0.2.global.prod.js"></script>
-      <script src="/public/js/highlight@11.3.1.min.js"></script>
-      <script src="/public/js/markdown-it@12.2.0.min.js"></script>
-    <% } %>
     <!-- built files will be auto injected -->
   </body>
 </html>

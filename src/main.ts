@@ -1,6 +1,6 @@
-import { loadApp } from './app'
 import { loadScript, loadStyle } from './utils'
 import { config } from './config'
+
 const load = (list: string[], callback: (item: string, resolve: (value: unknown) => void, reject: (value: unknown) => void) => void) => {
   if (Array.isArray(list) && list.length) {
     return Promise.all(
@@ -21,5 +21,6 @@ Promise.all([
     resolve(true)
   })
 ]).then(() => {
+  const { loadApp } = require('./app')
   loadApp()
 })
