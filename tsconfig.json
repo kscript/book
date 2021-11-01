@@ -29,6 +29,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "build/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",

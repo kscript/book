@@ -1,3 +1,4 @@
+import config from '@/config'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
@@ -11,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/markdown',
         name: 'markdown',
         component: () => import('@/views/markdown.vue'),
-        redirect: '/markdown/index'
+        redirect: `/markdown/${config.indexPath || 'index'}`
       },
       {
         path: '/markdown/:path/',

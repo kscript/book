@@ -1,5 +1,6 @@
 const path = require('path')
-module.exports = {
+const { onBeforeBuild } = require('./build/config')
+const baseConfig = {
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   transpileDependencies: true,
   productionSourceMap: false,
@@ -35,3 +36,5 @@ module.exports = {
     }
   }
 }
+const mergedConfig = typeof onBeforeBuild === 'function' ? onBeforeBuild(baseConfig) : baseConfig
+module.exports = mergedConfig instanceof Object ? mergedConfig : baseConfig
