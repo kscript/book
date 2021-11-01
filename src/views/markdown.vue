@@ -34,7 +34,7 @@ export default defineComponent({
     })
     try {
       getMarkdown(`${config.docsPath}${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
-        const { markdown: content, yaml } = extract(data) as extractResult 
+        const { markdown: content, yaml } = extract(data) as extractResult
         const html = markdown({
           html: true,
           linkify: true,

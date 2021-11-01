@@ -7,7 +7,9 @@ exports.config = {
   // markdown文档的扩展名
   docsExt: '.md',
   // fetch请求基础路径
-  baseUrl: isDev ? '/' : '/'
+  baseUrl: isDev ? '/' : '/',
+  scripts: [],
+  styles: []
 }
 exports.onBeforeBuild = () => {
   console.log('onBeforeBuild')

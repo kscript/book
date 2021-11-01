@@ -1,11 +1,25 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import '@/assets/scss/base.scss'
-if (process.env.NODE_ENV === 'development') {
-  require('github-markdown-css')
-  require('highlight.js/styles/atom-one-dark-reasonable.css')
+import { loadApp } from './app'
+import { loadScript, loadStyle } from './utils'
+import { config } from './config'
+const load = (list: string[], callback: (item: string, resolve: (value: unknown) => void, reject: (value: unknown) => void) => void) => {
+  if (Array.isArray(list) && list.length) {
+    return Promise.all(
+      list.map(item => {
+        return new Promise((resolve, reject) => {
+          callback(item, resolve, reject)
+        })
+      })
+    )
+  }
 }
-
-createApp(App).use(store).use(router).mount('#app')
+Promise.all([
+  load(config.scripts, (item, resolve) => {
+    loadScript(item, () => resolve(true))
+  }),
+  load(config.styles, (item, resolve) => {
+    loadStyle(item)
+    resolve(true)
+  })
+]).then(() => {
+  loadApp()
+})

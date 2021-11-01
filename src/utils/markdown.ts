@@ -1,7 +1,7 @@
 import fetchApi from './fetch'
 import jsyaml from 'js-yaml'
 interface yamlOptions {
-  [propName: string]: any;
+  [propName: string]: string | number | boolean | string[];
 }
 export interface extractResult {
   markdown: string;
@@ -9,7 +9,7 @@ export interface extractResult {
 }
 const parseYaml = (yaml: string): yamlOptions => {
   try {
-    const config = jsyaml.load(yaml) || {}
+    const config = <yamlOptions>jsyaml.load(yaml) || {}
     if (config instanceof Object) {
       return config
     }
