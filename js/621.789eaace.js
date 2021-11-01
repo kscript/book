@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkbook"]=self["webpackChunkbook"]||[]).push([[621],{8621:function(e,n,o){o.r(n),o.d(n,{default:function(){return s}});var t=o(311),r=(0,t.defineComponent)({name:"Home",setup(){return()=>(0,t.createVNode)("div",{class:"home"},[(0,t.createVNode)((0,t.resolveComponent)("router-view"),null,null)])}});const u=r;var s=u}}]);
