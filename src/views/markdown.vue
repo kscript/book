@@ -1,15 +1,15 @@
 <template>
   <div class="article-container">
-    <!-- <h1>{{id}}</h1> -->
-    <vue-markdown :md="md" :html="html" :id="id"></vue-markdown>
+    <h1 v-if="yaml.title">{{yaml.title}}</h1>
+    <vue-markdown :md="md" :html="html" :yaml="yaml" :id="id"></vue-markdown>
   </div>
 </template>
-<script>
+<script lang="ts">
 import hljs from 'highlight.js'
 import markdown from 'markdown-it'
 import { defineComponent, reactive, toRefs } from 'vue'
 import VueMarkdown from '@/components/markdown'
-import { getMarkdown, transform } from '@/utils/markdown'
+import { getMarkdown, transform, extract, extractResult } from '@/utils/markdown'
 import config from '@/config'
 export default defineComponent({
   components: {
@@ -29,11 +29,13 @@ export default defineComponent({
     const result = reactive({
       id: (props.name || props.path),
       html: '',
+      yaml: {},
       md: {}
     })
     try {
       getMarkdown(`${config.docsPath}${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
-        return markdown({
+        const { markdown: content, yaml } = extract(data) as extractResult 
+        const html = markdown({
           html: true,
           linkify: true,
           typographer: true,
@@ -46,11 +48,12 @@ export default defineComponent({
             }
             return ''
           }
-        }).render(transform(data))
-      }).then(html => {
-        Object.assign(result, {
-          html
-        })
+        }).render(transform(content))
+        Object.assign(result, { html, yaml })
+        return {
+          html,
+          yaml
+        }
       })
     } catch (err) {
       console.log(err)

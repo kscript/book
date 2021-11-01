@@ -13,6 +13,10 @@ export default defineComponent({
     html: {
       type: String,
       default: ''
+    },
+    yaml: {
+      type: Object,
+      default: () => ({})
     }
   },
   setup (props) {
