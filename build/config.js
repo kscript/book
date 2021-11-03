@@ -2,17 +2,73 @@ const isDev = process.env.NODE_ENV === 'development'
 const styles = isDev
   ? []
   : [
-      '/public/css/github-markdown.css',
-      '/public/css/atom-one-dark-reasonable.css'
+      {
+        name: 'github-markdown',
+        title: 'markdown样式',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: false,
+        path: '/public/css/github-markdown.css'
+      },
+      {
+        name: 'highlight-theme',
+        title: '代码高亮主题',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: false,
+        path: '/public/css/atom-one-dark-reasonable.css'
+      }
     ]
 const scripts = isDev
   ? []
   : [
-      '/public/js/vue@3.2.20.runtime.global.prod.js',
-      '/public/js/vue-router@4.0.12.global.prod.js',
-      '/public/js/vuex@4.0.2.global.prod.js',
-      '/public/js/highlight@11.3.1.min.js',
-      '/public/js/markdown-it@12.2.0.min.js'
+      {
+        name: 'vue',
+        title: 'vue3',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: true,
+        path: '/public/js/vue@3.2.20.runtime.global.prod.js'
+      },
+      {
+        name: 'vue-router',
+        title: 'vue 路由',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: true,
+        path: '/public/js/vue-router@4.0.12.global.prod.js'
+      },
+      {
+        name: 'vuex',
+        title: 'vue 状态管理',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: true,
+        path: '/public/js/vuex@4.0.2.global.prod.js'
+      },
+      {
+        name: 'highlight',
+        title: '代码高亮',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: true,
+        path: '/public/js/highlight@11.3.1.min.js'
+      },
+      {
+        name: 'markdown-it',
+        title: 'markdown解析',
+        desc: '',
+        optional: true,
+        enable: true,
+        required: true,
+        path: '/public/js/markdown-it@12.2.0.min.js'
+      }
     ]
 exports.config = {
   // markdown文档首页路由地址 /markdown/${indexPath}
