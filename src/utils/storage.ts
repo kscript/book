@@ -32,7 +32,7 @@ export class WebStorage {
     return {}
   }
 
-  set (key: string, value: string, expire: number = Date.now() + 10 * 24 * 3600 * 1000): void {
+  set (key: string, value: string | unknown, expire: number = Date.now() + 10 * 24 * 3600 * 1000): void {
     const data = {
       value,
       expire

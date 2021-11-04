@@ -3,14 +3,14 @@ interface scriptOption {
     title: string;
     path: string;
     desc: string;
-    required: boolean;
-    optional: boolean;
+    default: boolean;
     enable: boolean;
 }
 interface styleOption extends scriptOption {
 
 }
 interface Config {
+    index: string;
     indexPath: string;
     docsPath: string;
     baseUrl: string;

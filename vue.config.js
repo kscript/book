@@ -1,16 +1,25 @@
 const path = require('path')
 const { onBeforeBuild } = require('./build/config')
+// webpack.config.js
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const baseConfig = {
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   transpileDependencies: true,
   productionSourceMap: false,
   configureWebpack: {
+    plugins: [
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
     externals: process.env.NODE_ENV === 'development' ? {} : {
       'vue': 'Vue',
       'vue-router': 'VueRouter',
       'vuex': 'Vuex',
       'highlight.js': 'hljs',
-      'markdown-it': 'markdownit'
+      'markdown-it': 'markdownit',
+      "element-plus": 'ElementPlus'
     }
   },
   chainWebpack: config => {

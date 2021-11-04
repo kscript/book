@@ -1,6 +1,7 @@
 import { loadScript, loadStyle } from './utils'
 import storage from '@/utils/storage'
 import { config, updateConfig } from './config'
+
 const mergeBase = (config: buildConfig['config']) => {
   const baseConfig = storage.get('baseConfig') as buildConfig['config']
   if (baseConfig instanceof Object) {
@@ -23,6 +24,9 @@ const mergeResources = (config: buildConfig['config'], key: 'scripts' | 'styles'
     const nameMap: {
       [prop: string]: scriptOption
     } = {}
+    resources.forEach(item => {
+      item.default = false
+    })
     config[key].concat(resources).forEach(item => {
       if (nameMap[item.name]) {
         Object.assign(nameMap[item.name], item)
@@ -35,6 +39,9 @@ const mergeResources = (config: buildConfig['config'], key: 'scripts' | 'styles'
     })
   }
 }
+console.log({
+  storage, config
+})
 updateConfig((config) => {
   mergeBase(config)
   mergeResources(config, 'styles')
