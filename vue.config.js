@@ -18,8 +18,8 @@ const baseConfig = {
       'vue-router': 'VueRouter',
       'vuex': 'Vuex',
       'highlight.js': 'hljs',
-      'markdown-it': 'markdownit',
-      "element-plus": 'ElementPlus'
+      'markdown-it': 'markdownit'
+      // "element-plus": 'ElementPlus'
     }
   },
   chainWebpack: config => {

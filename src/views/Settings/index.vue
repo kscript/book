@@ -130,6 +130,8 @@
 import { defineComponent, ref } from 'vue'
 import config from '@/config'
 import {
+  ElRow,
+  ElCol,
   ElForm,
   ElFormItem,
   ElInput,
@@ -142,6 +144,8 @@ import {
 import storage from '@/utils/storage'
 export default defineComponent({
   components: {
+    ElRow,
+    ElCol,
     ElForm,
     ElFormItem,
     ElInput,
