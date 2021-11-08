@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重置配置</title>
+</head>
+<body>
+  <div class="main" style="text-align: center;margin: 150px auto 0;">
+    <h3>
+      点击下方重置按钮, 将应用恢复为默认状态
+    </h3>
+    <input id="input" type="submit" value="重置" style="font-size: 16px; margin-top: 20px; padding: 8px 25px; cursor: pointer;">
+  </div>
+  <script>
+    var input = document.getElementById('input')
+    input.addEventListener('click', function() {
+      localStorage.clear()
+      alert('重置成功!')
+      location.href = './'
+    })
+  </script>
+</body>
+</html>
