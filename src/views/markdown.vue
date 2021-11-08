@@ -7,7 +7,8 @@
 <script lang="ts">
 import hljs from 'highlight.js'
 import markdown from 'markdown-it'
-import { defineComponent, reactive, toRefs } from 'vue'
+import { useRoute } from 'vue-router'
+import { defineComponent, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import VueMarkdown from '@/components/markdown'
 import { getMarkdown, transform, extract, extractResult } from '@/utils/markdown'
 import config from '@/config'
@@ -26,38 +27,47 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const route = useRoute()
     const result = reactive({
       id: (props.name || props.path),
       html: '',
       yaml: {},
       md: {}
     })
-    try {
-      getMarkdown(`${config.docsPath}${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
-        const { markdown: content, yaml } = extract(data) as extractResult
-        const html = markdown({
-          html: true,
-          linkify: true,
-          typographer: true,
-          langPrefix: 'hljs language-',
-          highlight (str, lang) {
-            if (lang && hljs.getLanguage(lang)) {
-              try {
-                return hljs.highlight(lang, str).value
-              } catch (__) {}
+    const showMarkdown = () => {
+      try {
+        getMarkdown(`${config.docsPath}${props.path}${props.name ? '/' + props.name : ''}${config.docsExt}`).then(res => res.text()).then(data => {
+          const { markdown: content, yaml } = extract(data) as extractResult
+          const html = markdown({
+            html: true,
+            linkify: true,
+            typographer: true,
+            langPrefix: 'hljs language-',
+            highlight (str, lang) {
+              if (lang && hljs.getLanguage(lang)) {
+                try {
+                  return hljs.highlight(lang, str).value
+                } catch (__) {}
+              }
+              return ''
             }
-            return ''
+          }).render(transform(content))
+          Object.assign(result, { html, yaml })
+          return {
+            html,
+            yaml
           }
-        }).render(transform(content))
-        Object.assign(result, { html, yaml })
-        return {
-          html,
-          yaml
-        }
-      })
-    } catch (err) {
-      console.log(err)
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
+    watch(() => route.path, () => {
+      nextTick(() => showMarkdown())
+    })
+    onMounted(() => {
+      showMarkdown()
+    })
     return {
       ...toRefs(result)
     }

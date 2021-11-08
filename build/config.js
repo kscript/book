@@ -22,7 +22,7 @@ const styles = isDev
         name: 'element-plus-overlay',
         title: 'element弹出层遮罩样式',
         desc: '',
-        default: false,
+        default: true,
         enable: true,
         path: '/public/css/el-overlay.css'
       }
@@ -74,7 +74,7 @@ const scripts = isDev
 exports.config = {
   index: 'settings',
   // markdown文档首页路由地址 /markdown/${indexPath}
-  indexPath: '/markdown/index',
+  indexPath: 'index',
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   // markdown文档地址 支持相对路径和绝对路径
   docsPath: isDev ? 'book/' : 'docs/book/',
@@ -82,6 +82,7 @@ exports.config = {
   docsExt: '.md',
   // fetch请求基础路径
   baseUrl: isDev ? '/' : '/',
+  repositorie: 'https://github.com/kscript/book/',
   // 要加载的脚本
   scripts,
   // 要加载的样式

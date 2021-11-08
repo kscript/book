@@ -25,7 +25,7 @@ const mergeResources = (config: buildConfig['config'], key: 'scripts' | 'styles'
       [prop: string]: scriptOption
     } = {}
     resources.forEach(item => {
-      item.default = false
+      item.default = item.default || false
     })
     config[key].concat(resources).forEach(item => {
       if (nameMap[item.name]) {

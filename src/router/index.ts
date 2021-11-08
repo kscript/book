@@ -2,19 +2,25 @@ import config from '@/config'
 import storage from '@/utils/storage'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-const settings = storage.get('settings', {}) as buildConfig['config']
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
-    redirect: settings instanceof Object && settings.index === 'markdown' ? '/markdown' : '/settings',
+    redirect: (to) => {
+      const config = storage.get('baseConfig', {}) as buildConfig['config']
+      const route = config instanceof Object && config.index === 'markdown' ? '/markdown' : '/settings'
+      return route
+    },
     children: [
       {
         path: '/markdown',
         name: 'markdown',
         component: () => import('@/views/markdown.vue'),
-        redirect: `/markdown/${config.indexPath || 'index'}`
+        redirect: () => {
+          const config = storage.get('baseConfig', {}) as buildConfig['config']
+          return `/markdown/${config.indexPath || 'index'}`
+        }
       },
       {
         path: '/markdown/:path/',

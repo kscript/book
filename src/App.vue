@@ -13,15 +13,15 @@ export default defineComponent({
     const selectMenu = (index: string) => {
       if (index === 'index') {
         Router.push({
-          path: '/'
+          name: 'Home'
         })
       } else if (index === 'settings') {
         Router.push({
-          path: '/settings'
+          name: 'settings'
         })
       } else if (index === 'reset') {
         location.href = `${config.publicPath}reset.html`
-      } else if (index === 'repositories') {
+      } else if (index === 'repositorie') {
         location.href = config.repositorie
       }
     }
@@ -32,7 +32,7 @@ export default defineComponent({
           <el-menu-item index="index">首页</el-menu-item>
           <el-menu-item index="settings">设置</el-menu-item>
           <el-menu-item index="reset">重置</el-menu-item>
-          <el-menu-item class="right" index="repositories">仓库</el-menu-item>
+          <el-menu-item class="right" index="repositorie">仓库</el-menu-item>
         </el-menu>
         </el-header>
         <router-view></router-view>
