@@ -17,6 +17,14 @@ const styles = isDev
         default: false,
         enable: true,
         path: '/public/css/atom-one-dark-reasonable.css'
+      },
+      {
+        name: 'element-plus-overlay',
+        title: 'element弹出层遮罩样式',
+        desc: '',
+        default: false,
+        enable: true,
+        path: '/public/css/el-overlay.css'
       }
     ]
 const scripts = isDev
