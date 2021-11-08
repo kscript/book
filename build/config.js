@@ -75,6 +75,7 @@ exports.config = {
   index: 'settings',
   // markdown文档首页路由地址 /markdown/${indexPath}
   indexPath: '/markdown/index',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
   // markdown文档地址 支持相对路径和绝对路径
   docsPath: isDev ? 'book/' : 'docs/book/',
   // markdown文档的扩展名

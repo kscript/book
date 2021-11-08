@@ -12,6 +12,8 @@ interface styleOption extends scriptOption {
 interface Config {
     index: string;
     indexPath: string;
+    publicPath: string;
+    repositorie: string;
     docsPath: string;
     baseUrl: string;
     docsExt: string;
