@@ -30,22 +30,22 @@
                 <el-row type="flex">
                   <el-col :span="12">
                     <el-form-item prop="title" label="标题">
-                      <el-input v-model="vo.title"></el-input>
+                      <el-input v-model="vo.title" :disabled="vo.default"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item prop="name" label="标识">
-                      <el-input v-model="vo.name"></el-input>
+                      <el-input v-model="vo.name" :disabled="vo.default"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item prop="path" label="路径">
-                  <el-input v-model="vo.path"></el-input>
+                  <el-input v-model="vo.path" :disabled="vo.default"></el-input>
                 </el-form-item>
                 <el-row type="flex">
                   <el-col :span="12">
                     <el-form-item prop="required" label="默认">
-                      <el-radio-group v-model="vo.default" disabled>
+                      <el-radio-group v-model="vo.default" @change="itemDefaultChange(vo)">
                         <el-radio :label="true">是</el-radio>
                         <el-radio :label="false">否</el-radio>
                       </el-radio-group>
@@ -82,22 +82,22 @@
                 <el-row type="flex">
                   <el-col :span="12">
                     <el-form-item prop="title" label="标题">
-                      <el-input v-model="vo.title"></el-input>
+                      <el-input v-model="vo.title" :disabled="vo.default"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item prop="name" label="标识">
-                      <el-input v-model="vo.name"></el-input>
+                      <el-input v-model="vo.name" :disabled="vo.default"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item prop="path" label="路径">
-                  <el-input v-model="vo.path"></el-input>
+                  <el-input v-model="vo.path" :disabled="vo.default"></el-input>
                 </el-form-item>
                 <el-row type="flex">
                   <el-col :span="12">
-                    <el-form-item prop="required" label="默认">
-                      <el-radio-group v-model="vo.default" disabled>
+                    <el-form-item prop="default" label="默认">
+                      <el-radio-group v-model="vo.default" @change="itemDefaultChange(vo)">
                         <el-radio :label="true">是</el-radio>
                         <el-radio :label="false">否</el-radio>
                       </el-radio-group>
@@ -127,6 +127,7 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent, ref } from 'vue'
 import config from '@/config'
 import {
@@ -139,7 +140,8 @@ import {
   ElRadio,
   ElButton,
   ElEmpty,
-  ElMessage
+  ElMessage,
+  ElMessageBox
 } from 'element-plus'
 import storage from '@/utils/storage'
 export default defineComponent({
@@ -204,6 +206,18 @@ export default defineComponent({
     const changeIndex = () => {
       storage.set('settings', settings.value)
     }
+    const itemDefaultChange = (vo: typeof config.scripts[0] | typeof config.styles[0]) => {
+      !vo.default && ElMessageBox.confirm('当前资源为默认配置, 修改可能造成应用无法正常运行, 请确认是否要进行修改?', {
+        type: 'warning',
+        title: '确认操作',
+        cancelButtonText: '否, 暂不修改',
+        confirmButtonText: '是, 我要修改',
+        confirmButtonClass: 'el-button--danger',
+        center: true
+      }).catch(() => {
+        vo.default = !vo.default
+      })
+    }
     return {
       scripts,
       styles,
@@ -213,7 +227,8 @@ export default defineComponent({
       add,
       save,
       reset,
-      changeIndex
+      changeIndex,
+      itemDefaultChange
     }
   }
 })
