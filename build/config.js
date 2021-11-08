@@ -64,9 +64,9 @@ const scripts = isDev
       }
     ]
 exports.config = {
-  index: '',
+  index: 'settings',
   // markdown文档首页路由地址 /markdown/${indexPath}
-  indexPath: '',
+  indexPath: '/markdown/index',
   // markdown文档地址 支持相对路径和绝对路径
   docsPath: isDev ? 'book/' : 'docs/book/',
   // markdown文档的扩展名

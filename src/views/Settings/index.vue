@@ -9,6 +9,46 @@
           <el-radio label='markdown'>文档页</el-radio>
         </el-radio-group>
       </div>
+      <div class="flex-cell align-center">
+        <span class="label">文档首页: </span>
+        <div class="value">
+          <el-input v-model="settings.indexPath" :disabled="!edits.indexPath" @blur="edit('indexPath')">
+            <template #append>
+              <el-button type="primary" @click="edit('indexPath')">修改</el-button>
+            </template>
+          </el-input>
+        </div>
+      </div>
+      <div class="flex-cell align-center">
+        <span class="label">文档地址: </span>
+        <div class="value">
+          <el-input v-model="settings.docsPath" :disabled="!edits.docsPath" @blur="edit('docsPath')">
+            <template #append>
+              <el-button type="primary" @click="edit('docsPath')">修改</el-button>
+            </template>
+          </el-input>
+        </div>
+      </div>
+      <div class="flex-cell align-center">
+        <span class="label">文档后缀: </span>
+        <div class="value">
+          <el-input v-model="settings.docsExt" :disabled="!edits.docsExt" @blur="edit('docsExt')">
+            <template #append>
+              <el-button type="primary" @click="edit('docsExt')">修改</el-button>
+            </template>
+          </el-input>
+        </div>
+      </div>
+      <div class="flex-cell align-center">
+        <span class="label">接口基址: </span>
+        <div class="value">
+          <el-input v-model="settings.baseUrl" :disabled="!edits.baseUrl" @blur="edit('baseUrl')">
+            <template #append>
+              <el-button type="primary" @click="edit('baseUrl')">修改</el-button>
+            </template>
+          </el-input>
+        </div>
+      </div>
     </div>
     <el-empty v-if="!styles.length && !scripts.length">
       <template #description>
@@ -128,7 +168,7 @@
 
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, reactive, ref, toRefs } from 'vue'
 import config from '@/config'
 import {
   ElRow,
@@ -157,17 +197,27 @@ export default defineComponent({
     ElEmpty
   },
   setup () {
+    const edits = ref({
+      index: true,
+      indexPath: false,
+      docsPath: false,
+      docsExt: false,
+      baseUrl: false
+    })
     const storageSettings = storage.get('baseConfig', {})
-    const styles = ref(config.styles)
-    const scripts = ref(config.scripts)
-    const styleRefs = ref([] as typeof ElForm[])
-    const scriptRefs = ref([] as typeof ElForm[])
+    const { scripts, styles, ...base } = config
+    const state = reactive({
+      styles,
+      scripts,
+      styleRefs: [] as typeof ElForm[],
+      scriptRefs: [] as typeof ElForm[]
+    })
     const settings = ref(Object.assign({
-      index: 'settings'
-    }, storageSettings))
+    }, base, storageSettings))
+
     const add = (type: 'styles' | 'scripts') => {
-      const item = type === 'styles' ? styles : scripts
-      item.value.push({
+      const item = type === 'styles' ? state.styles : state.scripts
+      item.push({
         name: '',
         desc: '',
         title: '',
@@ -177,8 +227,8 @@ export default defineComponent({
       })
     }
     const save = (type: 'styles' | 'scripts') => {
-      const item = type === 'styles' ? styles : scripts
-      const list = item.value.filter(item => item.name && item.path)
+      const item = type === 'styles' ? state.styles : state.scripts
+      const list = item.filter(item => item.name && item.path)
       if (list.length) {
         storage.set(type, list)
         ElMessage({
@@ -186,7 +236,7 @@ export default defineComponent({
           message: '保存成功!'
         })
       }
-      if (item.value.length !== list.length) {
+      if (item.length !== list.length) {
         ElMessage({
           type: 'warning',
           message: '部分资源信息不完善, 保存时已忽略'
@@ -194,8 +244,8 @@ export default defineComponent({
       }
     }
     const reset = (type: 'styles' | 'scripts') => {
-      const refs = type === 'styles' ? styleRefs : scriptRefs
-      refs.value.forEach(ref => {
+      const refs = type === 'styles' ? state.styleRefs : state.scriptRefs
+      refs.forEach(ref => {
         ref.resetFields()
       })
       ElMessage({
@@ -204,12 +254,14 @@ export default defineComponent({
       })
     }
     const changeIndex = () => {
-      storage.set('settings', settings.value)
+      storage.set('baseConfig', settings.value)
     }
     const itemDefaultChange = (vo: typeof config.scripts[0] | typeof config.styles[0]) => {
-      !vo.default && ElMessageBox.confirm('当前资源为默认配置, 修改可能造成应用无法正常运行, 请确认是否要进行修改?', {
+      !vo.default && ElMessageBox({
         type: 'warning',
         title: '确认操作',
+        message: '当前资源为默认配置, 修改可能造成应用无法正常运行, 请确认是否要进行修改?',
+        showCancelButton: true,
         cancelButtonText: '否, 暂不修改',
         confirmButtonText: '是, 我要修改',
         confirmButtonClass: 'el-button--danger',
@@ -218,17 +270,27 @@ export default defineComponent({
         vo.default = !vo.default
       })
     }
+    const edit = (type: keyof typeof edits.value) => {
+      edits.value[type] = !edits.value[type]
+      if (!edits.value[type]) {
+        storage.set('baseConfig', settings.value)
+      }
+    }
+    if (!settings.value.index || !['settings', 'markdown'].includes(settings.value.index)) {
+      Object.assign(settings.value, {
+        index: 'settings'
+      })
+    }
     return {
-      scripts,
-      styles,
-      styleRefs,
-      scriptRefs,
+      ...toRefs(state),
       settings,
+      edits,
       add,
       save,
       reset,
       changeIndex,
-      itemDefaultChange
+      itemDefaultChange,
+      edit
     }
   }
 })
@@ -255,6 +317,9 @@ export default defineComponent({
   margin: 0 auto;
   .handles {
     padding: 50px 0;
+  }
+  .flex-cell {
+    margin-bottom: 10px;
   }
   .list-item {
     padding: 10px 30px;
