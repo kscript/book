@@ -1,4 +1,3 @@
-import config from '@/config'
 import storage from '@/utils/storage'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
@@ -12,6 +11,9 @@ const routes: Array<RouteRecordRaw> = [
       const route = config instanceof Object && config.index === 'markdown' ? '/markdown' : '/settings'
       return route
     },
+    meta: {
+      title: '首页'
+    },
     children: [
       {
         path: '/markdown',
@@ -20,6 +22,9 @@ const routes: Array<RouteRecordRaw> = [
         redirect: () => {
           const config = storage.get('baseConfig', {}) as buildConfig['config']
           return `/markdown/${config.indexPath || 'index'}`
+        },
+        meta: {
+          title: '文档'
         }
       },
       {
@@ -39,7 +44,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/settings',
     name: 'settings',
-    component: () => import('@/views/Settings/index.vue')
+    component: () => import('@/views/Settings/index.vue'),
+    meta: {
+      title: '设置'
+    }
   }
 ]
 
@@ -47,5 +55,11 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (typeof to.meta.title === 'string' && to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
 export default router
