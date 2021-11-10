@@ -36,7 +36,7 @@ const scripts = isDev
         desc: '',
         default: true,
         enable: true,
-        path: '/public/js/vue@3.2.20.runtime.global.prod.js'
+        path: '/public/js/vue@3.2.20.global.prod.js'
       },
       {
         name: 'vue-router',
@@ -69,6 +69,14 @@ const scripts = isDev
         default: true,
         enable: true,
         path: '/public/js/markdown-it@12.2.0.min.js'
+      },
+      {
+        name: 'githubIssue',
+        title: '使用hooks改造后, 可用于查看github issue的应用',
+        desc: '',
+        default: true,
+        enable: true,
+        path: '/book/js/github-issue.js'
       }
     ]
 exports.config = {
@@ -82,6 +90,7 @@ exports.config = {
   docsExt: '.md',
   // fetch请求基础路径
   baseUrl: isDev ? '/' : '/',
+  repos: '',
   repositorie: 'https://github.com/kscript/book/',
   // 要加载的脚本
   scripts,

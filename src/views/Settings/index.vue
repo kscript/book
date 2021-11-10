@@ -49,6 +49,16 @@
           </el-input>
         </div>
       </div>
+      <div class="flex-cell align-center">
+        <span class="label">用户仓库: </span>
+        <div class="value">
+          <el-input v-model="settings.repos" :disabled="!edits.repos" @blur="edit('repos')">
+            <template #append>
+              <el-button type="primary" @click="edit('repos')">修改</el-button>
+            </template>
+          </el-input>
+        </div>
+      </div>
     </div>
     <el-empty v-if="!styles.length && !scripts.length">
       <template #description>
@@ -197,13 +207,6 @@ export default defineComponent({
     ElEmpty
   },
   setup () {
-    const edits = ref({
-      index: true,
-      indexPath: false,
-      docsPath: false,
-      docsExt: false,
-      baseUrl: false
-    })
     const storageSettings = storage.get('baseConfig', {})
     const { scripts, styles, ...base } = config
     const state = reactive({
@@ -214,6 +217,12 @@ export default defineComponent({
     })
     const settings = ref(Object.assign({
     }, base, storageSettings))
+    const edits = ref({} as {[prop: string]: boolean})
+    for (const i in base) {
+      Object.assign(edits.value, {
+        [i]: i === 'index'
+      })
+    }
 
     const add = (type: 'styles' | 'scripts') => {
       const item = type === 'styles' ? state.styles : state.scripts

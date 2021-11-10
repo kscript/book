@@ -1,4 +1,5 @@
 import fetch from '@/utils/fetch'
+import config from '@/config'
 import { ComponentInternalInstance, getCurrentInstance } from 'vue'
 type Func = (...rest: unknown[]) => unknown
 declare const Hooks: {
@@ -11,6 +12,7 @@ export const getContext = (instance?: ComponentInternalInstance | null) => {
   instance = instance || getCurrentInstance()
   return {
     instance,
+    config,
     fetch
   }
 }
