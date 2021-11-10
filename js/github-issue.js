@@ -1,5 +1,5 @@
 var Hooks = (function() {
-  var repository = 'qappleh/Interview'
+  var repository = ''
   var cache = (function() {
     var cacheData = {}
     function get (name, value, successCB, failCB) {
@@ -109,6 +109,12 @@ var Hooks = (function() {
       var fetch = context.fetch
       var path = instance.props.path
       var name = instance.props.name
+      if (context.config.repos) {
+        repository = context.config.repos
+      }
+      if (!repository) {
+        return true
+      }
       if (path === 'index') {
         window.pageChange = function(pageno) {
           cache.get('libs', {}, function(libs) {
