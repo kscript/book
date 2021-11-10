@@ -5,6 +5,7 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const baseConfig = {
   publicPath: process.env.NODE_ENV === 'development' ? '/' : '/book/',
+  runtimeCompiler: true,
   transpileDependencies: true,
   productionSourceMap: false,
   configureWebpack: {
@@ -23,6 +24,7 @@ const baseConfig = {
     }
   },
   chainWebpack: config => {
+    // config.resolve.alias.set('vue$', 'vue/dist/vue.esm-bundler.js')
     config.module
       .rule('md')
       .test(/\.md$/)
