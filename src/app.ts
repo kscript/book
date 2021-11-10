@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/assets/scss/base.scss'
+import { emitHook, emitCB } from '@/utils/hooks'
 export const loadApp = (): void => {
   if (process.env.NODE_ENV === 'development') {
     require('github-markdown-css')
@@ -10,6 +11,6 @@ export const loadApp = (): void => {
     require('element-plus/lib/theme-chalk/index.css')
   }
   const app = createApp(App)
-  app.use(store).use(router).mount('#app')
+  emitCB(emitHook('onCreateApp')(app, { store, router }), () => app.use(store).use(router).mount('#app'))
 }
 export default loadApp
