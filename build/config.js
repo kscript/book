@@ -90,7 +90,7 @@ exports.config = {
   docsExt: '.md',
   // fetch请求基础路径
   baseUrl: isDev ? '/' : '/',
-  repos: '',
+  repos: 'kscript/book',
   repositorie: 'https://github.com/kscript/book/',
   // 要加载的脚本
   scripts,
